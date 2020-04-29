@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amanda.lutke\\Desktop\\interface\\interface.csproj",
+      "projectUniqueName": "C:\\Users\\amanda.lutke\\Desktop\\interface\\Interfaces\\interface.csproj",
       "projectName": "interface",
-      "projectPath": "C:\\Users\\amanda.lutke\\Desktop\\interface\\interface.csproj",
+      "projectPath": "C:\\Users\\amanda.lutke\\Desktop\\interface\\Interfaces\\interface.csproj",
       "packagesPath": "C:\\Users\\amanda.lutke\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amanda.lutke\\Desktop\\interface\\obj\\",
+      "outputPath": "C:\\Users\\amanda.lutke\\Desktop\\interface\\Interfaces\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\amanda.lutke\\AppData\\Roaming\\NuGet\\NuGet.Config"

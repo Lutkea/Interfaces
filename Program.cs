@@ -22,84 +22,122 @@ namespace aula
 
         Label label;
         Label lblNome;
-        Label lblEmail;
-        Label lblSenha;
-        Label lblConfSenha;
+        Label lb_Dtnasc;
+        Label lb_CPF;
+        Label lb_Diasdev;
         TextBox txtNome;
-        TextBox txtEmail;
-        TextBox txtSenha;
-        TextBox txtConfSenha;
-
+        TextBox txDtnasc;
+        TextBox txCPF;
+        ComboBox cbDiasdev;
+        CheckBox chbAtivo;    
+        RadioButton rbMasc;
+        RadioButton rbFemin;
+        RadioButton rbOutro;
         Button btConfirma;
         Button btCancela;
         public Formulario(){
             label = new Label();
-            label.Text = "Crie sua conta";
-            label.Location = new Point(100,5);
+            label.Text = "Informações";
+            label.Location = new Point(20,5);
 
             lblNome = new Label();
             lblNome.Text = "Insira seu nome";
-            lblNome.Location = new Point(20,22);
+            lblNome.Location = new Point(20,25);
 
             txtNome = new TextBox();
             txtNome.Text = "nome sobrenome";
-            txtNome.Location = new Point(20,47);
+            txtNome.Location = new Point(20,45);
 
-            lblEmail = new Label();
-            lblEmail.Text = "Insira seu e-mail";
-            lblEmail.Location = new Point(20,70);
+            lb_Dtnasc = new Label();
+            lb_Dtnasc.Text = "Data de Nascimento: ";
+            lb_Dtnasc.AutoSize = true;
+            lb_Dtnasc.Location = new Point(20, 65);
 
-            txtEmail = new TextBox();
-            txtEmail.Text = "exemplo@dominio.com";
-            txtEmail.Location = new Point(20,95);
+            lb_CPF = new Label();
+            lb_CPF.Text = "CPF: ";
+            lb_CPF.Location = new Point(20, 105);
 
-            lblSenha = new Label();
-            lblSenha.Text = "Crie uma senha";
-            lblSenha.Location = new Point(20,120);
+            lb_Diasdev = new Label();
+            lb_Diasdev.Text = "Dias de Devolução: ";
+            lb_Diasdev.AutoSize = true;
+            lb_Diasdev.Location = new Point(20, 145);
 
-            txtSenha = new TextBox();
-            txtSenha.Text = "******";
-            txtSenha.Location = new Point(20,143);
+            txtNome = new TextBox();
+            txtNome.Location = new Point(180, 20);
+            txtNome.Size = new Size(100, 18);
 
-            lblConfSenha = new Label();
-            lblConfSenha.Text = "Confirme sua senha";
-            lblConfSenha.Location = new Point(20,167);
+            txDtnasc = new TextBox();
+            txDtnasc.Location = new Point(180, 60);
+            txDtnasc.Size = new Size(100, 18);
 
-            txtConfSenha = new TextBox();
-            txtConfSenha.Text = "******";
-            txtConfSenha.Location = new Point(20,190);
+            txCPF = new TextBox();
+            txCPF.Location = new Point(180, 100);
+            txCPF.Size = new Size(100, 18);
+
+            cbDiasdev = new ComboBox();
+            cbDiasdev.Items.Add("5");
+            cbDiasdev.Items.Add("10");
+            cbDiasdev.Items.Add("15");
+            cbDiasdev.Items.Add("20");
+            cbDiasdev.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cbDiasdev.Location = new Point(180, 140);
+            cbDiasdev.Size = new Size(100, 18);
+
+            chbAtivo = new CheckBox();
+            chbAtivo.Location = new Point(180, 180);
+            chbAtivo.Size = new Size(100, 18);
+            chbAtivo.Text = "Ativo?";
+
+            rbMasc = new RadioButton();
+            rbMasc.Location = new Point(180, 220);
+            rbMasc.Size = new Size(100,18);
+            rbMasc.Text = "Masculino";
+
+            rbFemin = new RadioButton();
+            rbFemin.Location = new Point(180, 240);
+            rbFemin.Size = new Size(100,18);
+            rbFemin.Text = "Feminino";
+
+            rbOutro = new RadioButton();
+            rbOutro.Location = new Point(180, 260);
+            rbOutro.Size = new Size(100,18);
+            rbOutro.Text = "Outro";
 
             btConfirma = new Button();
             btConfirma.Text = "OK";
-            btConfirma.Location = new Point(75,250);
+            btConfirma.Location = new Point(180, 290);
             btConfirma.Click += new EventHandler(this.btConfirmaClick);
 
             btCancela = new Button();
             btCancela.Text = "Cancelar";
-            btCancela.Location = new Point(175,250);
+            btCancela.Location = new Point(180, 320);
             btCancela.Click += new EventHandler(this.btCancelaClick);  
 
             this.Controls.Add(label);
             this.Controls.Add(lblNome);
-            this.Controls.Add(lblEmail);
-            this.Controls.Add(lblSenha);
-            this.Controls.Add(lblConfSenha);
+            this.Controls.Add(lb_Dtnasc);
+            this.Controls.Add(lb_CPF);
+            this.Controls.Add(lb_Diasdev);
             this.Controls.Add(txtNome);
-            this.Controls.Add(txtEmail);
-            this.Controls.Add(txtSenha);
-            this.Controls.Add(txtConfSenha);
+            this.Controls.Add(txDtnasc);
+            this.Controls.Add(txCPF);
+            this.Controls.Add(cbDiasdev);
+            this.Controls.Add(chbAtivo);
+            this.Controls.Add(rbMasc);
+            this.Controls.Add(rbFemin);
+            this.Controls.Add(rbOutro);
             this.Controls.Add(btConfirma);
             this.Controls.Add(btCancela);
             this.Text = "Programa ADS";
+            this.Size = new Size (400, 400);
             
         }
 
         private void btConfirmaClick (object sender, EventArgs e){
             MessageBox.Show( 
-                $"Nome.: {txtNome.Text}\n" +
-                $"Email.: {txtEmail.Text}\n" +
-                $"Senha.: {txtSenha.Text}\n" +
-                $"Confirma Senha.: {txtConfSenha.Text}",
+               $"Nome: {txtNome.Text}\n" +
+                $"Data Nasci: {txDtnasc.Text}\n" +
+                $"C.P.F: {txCPF.Text}\n",
                 "Cliente",
                 MessageBoxButtons.OK
             );

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d2n4rmvr+/U2th2DSa9JZKNv5FRHzqVHeA1yQGO/GMsFceskotyQFPKQ7NOpc4Uod4WCeIv2PABgcc3UPIbuKA==",
+  "dgSpecHash": "3EvPGfyN9ngX46kk9I5aWmiLCeGMBBbTs3IaOO9gErHqVaQU7iumhqlYvXx5CtYULyX7kH784DBfU0UpTIAwyQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\amanda.lutke\\Desktop\\interface\\interface.csproj",
+  "projectFilePath": "C:\\Users\\amanda.lutke\\Desktop\\interface\\Interfaces\\interface.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -11,3 +11,16 @@ C:\Users\amanda.lutke\Desktop\interface\obj\Debug\netcoreapp3.1\interface.Assemb
 C:\Users\amanda.lutke\Desktop\interface\obj\Debug\netcoreapp3.1\interface.dll
 C:\Users\amanda.lutke\Desktop\interface\obj\Debug\netcoreapp3.1\interface.pdb
 C:\Users\amanda.lutke\Desktop\interface\obj\Debug\netcoreapp3.1\interface.genruntimeconfig.cache
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\bin\Debug\netcoreapp3.1\interface.exe
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\bin\Debug\netcoreapp3.1\interface.deps.json
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\bin\Debug\netcoreapp3.1\interface.runtimeconfig.json
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\bin\Debug\netcoreapp3.1\interface.runtimeconfig.dev.json
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\bin\Debug\netcoreapp3.1\interface.dll
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\bin\Debug\netcoreapp3.1\interface.pdb
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\obj\Debug\netcoreapp3.1\interface.csprojAssemblyReference.cache
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\obj\Debug\netcoreapp3.1\interface.csproj.CoreCompileInputs.cache
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\obj\Debug\netcoreapp3.1\interface.AssemblyInfoInputs.cache
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\obj\Debug\netcoreapp3.1\interface.AssemblyInfo.cs
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\obj\Debug\netcoreapp3.1\interface.dll
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\obj\Debug\netcoreapp3.1\interface.pdb
+C:\Users\amanda.lutke\Desktop\interface\Interfaces\obj\Debug\netcoreapp3.1\interface.genruntimeconfig.cache
