@@ -25,9 +25,11 @@ namespace aula
         Label lb_Dtnasc;
         Label lb_CPF;
         Label lb_Diasdev;
-        TextBox txtNome;
-        TextBox txDtnasc;
-        TextBox txCPF;
+        RichTextBox txtNome;
+        NumericUpDown numDtNascDia;
+        NumericUpDown numDtNascMes;
+        NumericUpDown numDtNascAno;
+        MaskedTextBox txCPF;
         ComboBox cbDiasdev;
         CheckBox chbAtivo;    
         RadioButton rbMasc;
@@ -35,7 +37,10 @@ namespace aula
         RadioButton rbOutro;
         Button btConfirma;
         Button btCancela;
+        PictureBox pbImagem;
         public Formulario(){
+
+            // Label
             label = new Label();
             label.Text = "Informações";
             label.Location = new Point(20,5);
@@ -44,9 +49,11 @@ namespace aula
             lblNome.Text = "Insira seu nome";
             lblNome.Location = new Point(20,25);
 
-            txtNome = new TextBox();
-            txtNome.Text = "nome sobrenome";
-            txtNome.Location = new Point(20,45);
+            // Rich Text Box
+            txtNome = new RichTextBox();
+            txtNome.SelectionFont = new Font("Arial", 10);
+            txtNome.Location = new Point(180, 30);
+            txtNome.Size = new Size(100, 20);
 
             lb_Dtnasc = new Label();
             lb_Dtnasc.Text = "Data de Nascimento: ";
@@ -62,18 +69,35 @@ namespace aula
             lb_Diasdev.AutoSize = true;
             lb_Diasdev.Location = new Point(20, 145);
 
-            txtNome = new TextBox();
-            txtNome.Location = new Point(180, 20);
-            txtNome.Size = new Size(100, 18);
+            // Numeric Up Down 
+            numDtNascDia = new NumericUpDown();
+            numDtNascDia.Location = new Point(180,60);
+            numDtNascDia.Size = new Size (50, 65);
+            numDtNascDia.Maximum = 31;
+            numDtNascDia.Minimum = 1;
+            numDtNascDia.Increment = 1;
 
-            txDtnasc = new TextBox();
-            txDtnasc.Location = new Point(180, 60);
-            txDtnasc.Size = new Size(100, 18);
+            numDtNascMes = new NumericUpDown();
+            numDtNascMes.Location = new Point(240,60);
+            numDtNascMes.Size = new Size (50, 65);
+            numDtNascMes.Maximum = 12;
+            numDtNascMes.Minimum = 1;
+            numDtNascMes.Increment = 1;
 
-            txCPF = new TextBox();
+            numDtNascAno = new NumericUpDown();
+            numDtNascAno.Location = new Point(300,60);
+            numDtNascAno.Size = new Size (50, 75);
+            numDtNascAno.Maximum = 2002;
+            numDtNascAno.Minimum = 1950;
+            numDtNascAno.Increment = 10;
+
+            // Masked
+            txCPF = new MaskedTextBox();
             txCPF.Location = new Point(180, 100);
             txCPF.Size = new Size(100, 18);
+            txCPF.Mask = "000,000,000-00";
 
+            // Combo Box
             cbDiasdev = new ComboBox();
             cbDiasdev.Items.Add("5");
             cbDiasdev.Items.Add("10");
@@ -83,11 +107,13 @@ namespace aula
             cbDiasdev.Location = new Point(180, 140);
             cbDiasdev.Size = new Size(100, 18);
 
+            // Check Box
             chbAtivo = new CheckBox();
             chbAtivo.Location = new Point(180, 180);
             chbAtivo.Size = new Size(100, 18);
             chbAtivo.Text = "Ativo?";
 
+            // Radio Button 
             rbMasc = new RadioButton();
             rbMasc.Location = new Point(180, 220);
             rbMasc.Size = new Size(100,18);
@@ -105,13 +131,21 @@ namespace aula
 
             btConfirma = new Button();
             btConfirma.Text = "OK";
-            btConfirma.Location = new Point(180, 290);
+            btConfirma.Location = new Point(180, 320);
             btConfirma.Click += new EventHandler(this.btConfirmaClick);
 
             btCancela = new Button();
             btCancela.Text = "Cancelar";
-            btCancela.Location = new Point(180, 320);
-            btCancela.Click += new EventHandler(this.btCancelaClick);  
+            btCancela.Location = new Point(180, 350);
+            btCancela.Click += new EventHandler(this.btCancelaClick);
+
+            // Picture
+            pbImagem = new PictureBox();
+            pbImagem.Location = new Point (10, 200);    
+            pbImagem.Size = new Size(10, 320);
+            pbImagem.ClientSize = new Size (120 , 100);
+            pbImagem.Load ("image.png");
+            pbImagem.SizeMode = PictureBoxSizeMode.Zoom;
 
             this.Controls.Add(label);
             this.Controls.Add(lblNome);
@@ -119,7 +153,9 @@ namespace aula
             this.Controls.Add(lb_CPF);
             this.Controls.Add(lb_Diasdev);
             this.Controls.Add(txtNome);
-            this.Controls.Add(txDtnasc);
+            this.Controls.Add(numDtNascDia);
+            this.Controls.Add(numDtNascMes);
+            this.Controls.Add(numDtNascAno);
             this.Controls.Add(txCPF);
             this.Controls.Add(cbDiasdev);
             this.Controls.Add(chbAtivo);
@@ -128,16 +164,18 @@ namespace aula
             this.Controls.Add(rbOutro);
             this.Controls.Add(btConfirma);
             this.Controls.Add(btCancela);
+            this.Controls.Add(pbImagem);
             this.Text = "Programa ADS";
-            this.Size = new Size (400, 400);
+            this.Size = new Size (400, 450);
             
         }
 
         private void btConfirmaClick (object sender, EventArgs e){
             MessageBox.Show( 
                $"Nome: {txtNome.Text}\n" +
-                $"Data Nasci: {txDtnasc.Text}\n" +
-                $"C.P.F: {txCPF.Text}\n",
+                $"Data Nascimento: {numDtNascDia.Value + "/" + numDtNascMes.Value + "/" +  numDtNascAno.Value}\n" +
+                $"C.P.F: {txCPF.Text}\n" +
+                $"Dias Devolução:> {cbDiasdev.Text}\n",
                 "Cliente",
                 MessageBoxButtons.OK
             );
