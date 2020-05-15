@@ -38,6 +38,12 @@ namespace aula
         Button btConfirma;
         Button btCancela;
         PictureBox pbImagem;
+        LinkLabel linkHelp;
+    
+        // ListBox listBox;
+        ListView listView;
+
+        //CheckedListBox checkedList;
         public Formulario(){
 
             // Label
@@ -141,11 +147,67 @@ namespace aula
 
             // Picture
             pbImagem = new PictureBox();
-            pbImagem.Location = new Point (10, 200);    
-            pbImagem.Size = new Size(10, 320);
-            pbImagem.ClientSize = new Size (120 , 100);
+            pbImagem.Location = new Point (50, 320);    
+            pbImagem.Size = new Size(100, 100);
+            pbImagem.ClientSize = new Size (100 , 100);
             pbImagem.Load ("image.png");
             pbImagem.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // Link Label            
+            linkHelp = new LinkLabel();
+            linkHelp.Location = new Point(20, 280);
+            linkHelp.Size = new Size (100, 30);
+            linkHelp.Text = "Ajuda";
+            linkHelp.LinkClicked += new LinkLabelLinkClickedEventHandler(this.helpLink);
+
+
+            /*List Box
+            listBox = new ListBox();
+            listBox.Items.Add("Peixe Grande");
+            listBox.Items.Add("Coringa");
+            listBox.Items.Add("Star Wars");
+            listBox.Location = new Point (15, 180);
+            listBox.Size = new Size (100, 100);
+            
+            //listBox.SelectionMode = SelectionMode.MultiExtended;
+            //listBox.EndUpdate()
+            //lisBox.MultiColumn = true;
+            
+            */
+
+            //List View
+            listView = new ListView();
+            listView.Location = new Point (15, 180);
+            listView.Size = new Size (150, 100);
+            listView.View = View.Details;
+            ListViewItem filme1 = new ListViewItem("Peixe Grande");
+            filme1.SubItems.Add("3");
+            filme1.SubItems.Add("2004");
+            ListViewItem filme2 = new ListViewItem("Coringa");
+            filme2.SubItems.Add("2");
+            filme2.SubItems.Add("2019");
+            ListViewItem filme3 = new ListViewItem("Star Wars");
+            filme3.SubItems.Add("1");
+            filme3.SubItems.Add("1977");
+            listView.Items.AddRange(new ListViewItem[]{filme1, filme2, filme3});
+            listView.Columns.Add("Nome", -2, HorizontalAlignment.Left);
+            listView.Columns.Add("Estoque", -2, HorizontalAlignment.Left);
+            listView.Columns.Add("Ano", -2, HorizontalAlignment.Left);
+            listView.FullRowSelect = true;
+            listView.GridLines = true;
+            listView.AllowColumnReorder = true;
+            listView.Sorting = SortOrder.Ascending;
+
+            /*Check Box
+            checkedList = new CheckedListBox();
+            checkedList.Location = new Point(15, 180);
+            checkedList.Size = new Size(150, 100);
+            string[] filmes = {"Peixe Grande, Coringa, Star Wars"};
+            checkedList.Items.AddRange(filmes);
+            checkedList.SelectionMode = SelectionMode.One;
+            checkedList.CheckOnClick = true;
+            */
+
 
             this.Controls.Add(label);
             this.Controls.Add(lblNome);
@@ -165,12 +227,31 @@ namespace aula
             this.Controls.Add(btConfirma);
             this.Controls.Add(btCancela);
             this.Controls.Add(pbImagem);
+            this.Controls.Add(linkHelp);
+            // this.Controls.Add(listBox);
+            this.Controls.Add(listView);
+            //this.Controls.Add(checkedList);
             this.Text = "Programa ADS";
             this.Size = new Size (400, 450);
             
         }
 
-        private void btConfirmaClick (object sender, EventArgs e){
+        private void helpLink(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try{
+                VisitLink();
+            }
+            catch (Exception err){
+                MessageBox.Show(err.Message);
+            }
+        }
+        private void VisitLink()
+        {
+            this.linkHelp.LinkVisited = true;
+            System.Diagnostics.Process.Start("C:\\Program Files (x86)\\Google\\Chrome\\Application\\Chrome.exe","http://google.com");
+        }
+
+            private void btConfirmaClick (object sender, EventArgs e){
             MessageBox.Show( 
                $"Nome: {txtNome.Text}\n" +
                 $"Data Nascimento: {numDtNascDia.Value + "/" + numDtNascMes.Value + "/" +  numDtNascAno.Value}\n" +
