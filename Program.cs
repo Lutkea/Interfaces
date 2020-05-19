@@ -44,6 +44,9 @@ namespace aula
         ListView listView;
 
         //CheckedListBox checkedList;
+        MonthCalendar mcmonthCalendar;
+        DateTimePicker dtPicker;
+        ProgressBar pbTeste;
         public Formulario(){
 
             // Label
@@ -207,7 +210,34 @@ namespace aula
             checkedList.SelectionMode = SelectionMode.One;
             checkedList.CheckOnClick = true;
             */
+            // Month Calendar
 
+            mcmonthCalendar = new MonthCalendar();
+            //mcmonthCalendar.MaxSelectionCount = 10;
+            mcmonthCalendar.Location = new Point (400, 15);
+            //mcmonthCalendar.MinDate = new DateTime (2020,05,01);
+            //mcmonthCalendar.MaxDate = new DateTime(2070,12,31);
+            //mcmonthCalendar.SelectionRange = new SelectionRange(new DateTime(2020,05,16), new DateTime(2020, 05, 26));
+            
+            // Date Time Picker
+            dtPicker = new DateTimePicker();
+            dtPicker.Location = new Point(650, 15);
+            dtPicker.Size = new Size (300, 15);
+            dtPicker.Format = DateTimePickerFormat.Short;
+            //dtPicker.Format = DateTimePickerFormat.Custom;
+            //dtPicker.CustomFormat = "MMMM dd, yyyy - dddd";
+            //dtPicker.ShowCheckBox = true;
+            dtPicker.ShowUpDown = true;
+
+            // Progress Bar
+            pbTeste = new ProgressBar();
+            pbTeste.Location = new Point (400, 230);
+            pbTeste.Size = new Size(300, 15);
+            pbTeste.Value = 50;
+            pbTeste.Maximum = 100;
+            pbTeste.Step = 25;
+            //pbTeste.Style = ProgressBarStyle.Marquee;
+            //pbTeste.MarqueeAnimationSpeed = 30; 
 
             this.Controls.Add(label);
             this.Controls.Add(lblNome);
@@ -231,8 +261,11 @@ namespace aula
             // this.Controls.Add(listBox);
             this.Controls.Add(listView);
             //this.Controls.Add(checkedList);
+            this.Controls.Add(mcmonthCalendar);
+            this.Controls.Add(dtPicker);
+            this.Controls.Add(pbTeste);
             this.Text = "Programa ADS";
-            this.Size = new Size (400, 450);
+            this.Size = new Size (1000, 450);
             
         }
 
