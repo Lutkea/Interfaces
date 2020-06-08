@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace aula
 {
@@ -20,6 +21,12 @@ namespace aula
     }
     public class Formulario : Form {
 
+        TabControl tabControl;
+        TabPage tabPagePrincipal;
+        TabPage tabPageSecundario;
+
+        ToolTip toolTipNome = new ToolTip();
+
         Label label;
         Label lblNome;
         Label lb_Dtnasc;
@@ -37,6 +44,7 @@ namespace aula
         RadioButton rbOutro;
         Button btConfirma;
         Button btCancela;
+        Button btOpenFile;
         PictureBox pbImagem;
         LinkLabel linkHelp;
     
@@ -47,7 +55,21 @@ namespace aula
         MonthCalendar mcmonthCalendar;
         DateTimePicker dtPicker;
         ProgressBar pbTeste;
+        TrackBar track;
         public Formulario(){
+
+            tabPagePrincipal = new TabPage();
+            tabPagePrincipal.Text = "Principal";
+            tabPagePrincipal.Size = new Size (1000, 450);
+
+            tabPageSecundario = new TabPage();
+            tabPageSecundario.Text = "Secundario";
+            tabPageSecundario.Size = new Size(1000, 450);
+
+            tabControl = new TabControl();
+            tabControl.Size = new Size (1000, 450);
+            tabControl.Controls.Add(tabPagePrincipal);
+            tabControl.Controls.Add(tabPageSecundario);
 
             // Label
             label = new Label();
@@ -63,6 +85,12 @@ namespace aula
             txtNome.SelectionFont = new Font("Arial", 10);
             txtNome.Location = new Point(180, 30);
             txtNome.Size = new Size(100, 20);
+
+            toolTipNome.AutoPopDelay = 5000;
+            toolTipNome.InitialDelay = 1000;
+            toolTipNome.ReshowDelay = 500;
+            toolTipNome.ShowAlways = true;
+            toolTipNome.SetToolTip(txtNome, "Informe o nome");
 
             lb_Dtnasc = new Label();
             lb_Dtnasc.Text = "Data de Nascimento: ";
@@ -148,6 +176,11 @@ namespace aula
             btCancela.Location = new Point(180, 350);
             btCancela.Click += new EventHandler(this.btCancelaClick);
 
+            btOpenFile = new Button();
+            btOpenFile.Text = "Open File";
+            btOpenFile.Location = new Point(180, 380);
+            btOpenFile.Click += new EventHandler(this.btOpenFileClick);
+
             // Picture
             pbImagem = new PictureBox();
             pbImagem.Location = new Point (50, 320);    
@@ -163,6 +196,13 @@ namespace aula
             linkHelp.Text = "Ajuda";
             linkHelp.LinkClicked += new LinkLabelLinkClickedEventHandler(this.helpLink);
 
+            track = new TrackBar();
+            track.Location = new System.Drawing.Point(8, 8);
+            track.Size = new System.Drawing.Size(224, 45);
+            track.Maximum = 30;
+            track.TickFrequency = 5;
+            track.LargeChange = 3;
+            track.SmallChange = 2;
 
             /*List Box
             listBox = new ListBox();
@@ -237,36 +277,81 @@ namespace aula
             pbTeste.Maximum = 100;
             pbTeste.Step = 25;
             //pbTeste.Style = ProgressBarStyle.Marquee;
-            //pbTeste.MarqueeAnimationSpeed = 30; 
+            //pbTeste.MarqueeAnimationSpeed = 30;
 
-            this.Controls.Add(label);
-            this.Controls.Add(lblNome);
-            this.Controls.Add(lb_Dtnasc);
-            this.Controls.Add(lb_CPF);
-            this.Controls.Add(lb_Diasdev);
-            this.Controls.Add(txtNome);
-            this.Controls.Add(numDtNascDia);
-            this.Controls.Add(numDtNascMes);
-            this.Controls.Add(numDtNascAno);
-            this.Controls.Add(txCPF);
-            this.Controls.Add(cbDiasdev);
-            this.Controls.Add(chbAtivo);
-            this.Controls.Add(rbMasc);
-            this.Controls.Add(rbFemin);
-            this.Controls.Add(rbOutro);
-            this.Controls.Add(btConfirma);
-            this.Controls.Add(btCancela);
-            this.Controls.Add(pbImagem);
-            this.Controls.Add(linkHelp);
-            // this.Controls.Add(listBox);
-            this.Controls.Add(listView);
-            //this.Controls.Add(checkedList);
-            this.Controls.Add(mcmonthCalendar);
-            this.Controls.Add(dtPicker);
-            this.Controls.Add(pbTeste);
-            this.Text = "Programa ADS";
-            this.Size = new Size (1000, 450);
+            MenuStrip ms = new MenuStrip();
+            ToolStripMenuItem windowMenu = new ToolStripMenuItem("Window");
+            ToolStripMenuItem windowNewMenu = new ToolStripMenuItem("New", null, new EventHandler(windowNewMenu_Click));
+            ToolStripMenuItem windowSaveMenu = new ToolStripMenuItem("Save");
+            windowSaveMenu.Click += new EventHandler(windowsSaveMenu_Click);
+            windowMenu.DropDownItems.Add(windowNewMenu);
+            windowMenu.DropDownItems.Add(windowSaveMenu);
+            ((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowImageMargin = false;
+            ((ToolStripDropDownMenu)(windowMenu.DropDown)).ShowCheckMargin = true;
+
+            // Assign the ToolStripMenuItem that displays 
+            // the list of child forms.
+            ms.MdiWindowListItem = windowMenu;
+
+            // Add the window ToolStripMenuItem to the MenuStrip.
+            ms.Items.Add(windowMenu);
+
+            // Dock the MenuStrip to the top of the form.
+            ms.Dock = DockStyle.Top;
+
+            // The Form.MainMenuStrip property determines the merge target.
+            this.MainMenuStrip = ms;
+
+            // Add the ToolStripPanels to the form in reverse order.
+            /*this.Controls.Add(tspRight);
+            this.Controls.Add(tspLeft);
+            this.Controls.Add(tspBottom);
+            this.Controls.Add(tspTop);*/
+
+            // Add the MenuStrip last.
+            // This is important for correct placement in the z-order.
+            this.Controls.Add(ms);
+
+
+            tabPageSecundario.Controls.Add(track);
+
+            tabPagePrincipal.Controls.Add(label);
+            tabPagePrincipal.Controls.Add(lblNome);
+            tabPagePrincipal.Controls.Add(lb_Dtnasc);
+            tabPagePrincipal.Controls.Add(lb_CPF);
+            tabPagePrincipal.Controls.Add(lb_Diasdev);
+            tabPagePrincipal.Controls.Add(txtNome);
+            tabPagePrincipal.Controls.Add(numDtNascDia);
+            tabPagePrincipal.Controls.Add(numDtNascMes);
+            tabPagePrincipal.Controls.Add(numDtNascAno);
+            tabPagePrincipal.Controls.Add(txCPF);
+            tabPagePrincipal.Controls.Add(cbDiasdev);
+            tabPagePrincipal.Controls.Add(chbAtivo);
+            tabPagePrincipal.Controls.Add(rbMasc);
+            tabPagePrincipal.Controls.Add(rbFemin);
+            tabPagePrincipal.Controls.Add(rbOutro);
+            tabPagePrincipal.Controls.Add(btConfirma);
+            tabPagePrincipal.Controls.Add(btCancela);
+            tabPagePrincipal.Controls.Add(btOpenFile);
+            tabPagePrincipal.Controls.Add(pbImagem);
+            tabPagePrincipal.Controls.Add(linkHelp);
+            // tabPagePrincipal.Controls.Add(listBox);
+            tabPagePrincipal.Controls.Add(listView);
+            //tabPagePrincipal.Controls.Add(checkedList);
+            tabPagePrincipal.Controls.Add(mcmonthCalendar);
+            tabPagePrincipal.Controls.Add(dtPicker);
+            tabPagePrincipal.Controls.Add(pbTeste);
+            this.Controls.Add(tabControl);
+            tabPagePrincipal.Text = "Programa ADS";
+            tabPagePrincipal.Size = new Size (1000, 450);
             
+        }
+        private void windowNewMenu_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("New!");
+        }
+        private void windowsSaveMenu_Click(object sender, EventArgs e){
+            MessageBox.Show("Save!");
         }
 
         private void helpLink(object sender, LinkLabelLinkClickedEventArgs e)
@@ -296,6 +381,18 @@ namespace aula
         }
         private void btCancelaClick(object sender, EventArgs e){
             this.Close();
+        }
+        
+        private void btOpenFileClick(object sender, EventArgs e){
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.ShowDialog();
+            if (dialog.ShowDialog() != DialogResult.Cancel){
+                StreamReader arquivo = new StreamReader (dialog.FileName);
+                string conteudo = arquivo.ReadLine();
+                arquivo.Dispose();
+
+                MessageBox.Show(conteudo);
+            }
         }
     }
 }
